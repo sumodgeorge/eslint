@@ -16,7 +16,7 @@
             {% for key, other_site in sites %}
             <option
                 value="{{ other_site.language.code }}"
-                data-url="https://{{ other_site.hostname }}/docs{% if process.env.BRANCH !== '/latest' %}/latest{% endif %}{{ page.url | prettyURL }}"
+                data-url="https://{{ other_site.hostname }}/docs/latest{{ page.url | prettyURL }}"
                 {% if site.language.code==other_site.language.code %}selected{% endif %}
             >
                 {{ other_site.language.flag }} {{ other_site.language.name }}
