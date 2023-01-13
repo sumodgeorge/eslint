@@ -71,8 +71,26 @@ module.exports = function(eleventyConfig) {
      */
     function slugify(text) {
         return slug(text.replace(/[<>()[\]{}]/gu, ""))
-        // eslint-disable-next-line no-control-regex -- used regex from https://github.com/eslint/archive-website/blob/master/_11ty/plugins/markdown-plugins.js#L37
-            .replace(/[^\u{00}-\u{FF}]/gu, "");
+        /* eslint-disable no-control-regex, require-unicode-regexp -- used regex from https://github.com/eslint/archive-website/blob/master/_11ty/plugins/markdown-plugins.js#L37*/
+
+        // Remove control characters
+            .replace(/[\u0000-\u001F]/g, "")
+
+        // replace special characters
+            .replace(/[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g, "-")
+
+        // remove continuos separators
+
+            .replace(/-{2,}/g, "-")
+
+        // remove prefixing and trailing separtors
+            .replace(/^-+|-+$/g, "")
+
+        /* eslint-enable no-control-regex, require-unicode-regexp -- end */
+
+        // lowercase
+            .toLowerCase();
+
     }
 
     eleventyConfig.addFilter("slugify", str => {
@@ -193,7 +211,7 @@ module.exports = function(eleventyConfig) {
     const markdownIt = require("markdown-it");
     const md = markdownIt({ html: true, linkify: true, typographer: true, highlight: (str, lang) => highlighter(md, str, lang) })
         .use(markdownItAnchor, {
-            slugify
+            slugify: s => slugify(s)
         })
         .use(markdownItContainer, "correct", {})
         .use(markdownItContainer, "incorrect", {})

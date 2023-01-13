@@ -69,7 +69,7 @@ const { ESLint } = require("eslint");
 });
 ```
 
-### ◆ new ESLint(options)
+### new ESLint(options)
 
 ```js
 const eslint = new ESLint(options);
@@ -133,7 +133,7 @@ The `ESLint` constructor takes an `options` object. If you omit the `options` ob
 * `options.cacheStrategy` (`string`)<br>
   Default is `"metadata"`. Strategy for the cache to use for detecting changed files. Can be either `"metadata"` or `"content"`.
 
-### ◆ eslint.lintFiles(patterns)
+### eslint.lintFiles(patterns)
 
 ```js
 const results = await eslint.lintFiles(patterns);
@@ -151,7 +151,7 @@ This method lints the files that match the glob patterns and then returns the re
 * (`Promise<LintResult[]>`)<br>
   The promise that will be fulfilled with an array of [LintResult] objects.
 
-### ◆ eslint.lintText(code, options)
+### eslint.lintText(code, options)
 
 ```js
 const results = await eslint.lintText(code, options);
@@ -179,7 +179,7 @@ The second parameter `options` is omittable.
 * (`Promise<LintResult[]>`)<br>
   The promise that will be fulfilled with an array of [LintResult] objects. This is an array (despite there being only one lint result) in order to keep the interfaces between this and the [`eslint.lintFiles()`][eslint-lintfiles] method similar.
 
-### ◆ eslint.getRulesMetaForResults(results)
+### eslint.getRulesMetaForResults(results)
 
 ```js
 const results = await eslint.lintFiles(patterns);
@@ -198,7 +198,7 @@ This method returns an object containing meta information for each rule that tri
 * (`Object`)<br>
   An object whose property names are the rule IDs from the `results` and whose property values are the rule's meta information (if available).
 
-### ◆ eslint.calculateConfigForFile(filePath)
+### eslint.calculateConfigForFile(filePath)
 
 ```js
 const config = await eslint.calculateConfigForFile(filePath);
@@ -222,7 +222,7 @@ This method calculates the configuration for a given file, which can be useful f
 * (`Promise<Object>`)<br>
   The promise that will be fulfilled with a configuration object.
 
-### ◆ eslint.isPathIgnored(filePath)
+### eslint.isPathIgnored(filePath)
 
 ```js
 const isPathIgnored = await eslint.isPathIgnored(filePath);
@@ -240,7 +240,7 @@ This method checks if a given file is ignored by your configuration.
 * (`Promise<boolean>`)<br>
   The promise that will be fulfilled with whether the file is ignored or not. If the file is ignored, then it will return `true`.
 
-### ◆ eslint.loadFormatter(nameOrPath)
+### eslint.loadFormatter(nameOrPath)
 
 ```js
 const formatter = await eslint.loadFormatter(nameOrPath);
@@ -265,7 +265,7 @@ This method loads a formatter. Formatters convert lint results to a human- or ma
 * (`Promise<LoadedFormatter>`)<br>
   The promise that will be fulfilled with a [LoadedFormatter] object.
 
-### ◆ ESLint.version
+### ESLint.version
 
 ```js
 const version = ESLint.version;
@@ -275,7 +275,7 @@ The version string of ESLint. E.g. `"7.0.0"`.
 
 This is a static property.
 
-### ◆ ESLint.outputFixes(results)
+### ESLint.outputFixes(results)
 
 ```js
 await ESLint.outputFixes(results);
@@ -295,7 +295,7 @@ This is a static method.
 * (`Promise<void>`)<br>
   The promise that will be fulfilled after all files are written.
 
-### ◆ ESLint.getErrorResults(results)
+### ESLint.getErrorResults(results)
 
 ```js
 const filteredResults = ESLint.getErrorResults(results);
@@ -315,7 +315,7 @@ This is a static method.
 * (`LintResult[]`)<br>
   The filtered [LintResult] objects.
 
-### ◆ LintResult type
+### LintResult type
 
 The `LintResult` value is the information of the linting result of each file. The [`eslint.lintFiles()`][eslint-lintfiles] and [`eslint.lintText()`][eslint-linttext] methods return it. It has the following properties:
 
@@ -342,7 +342,7 @@ The `LintResult` value is the information of the linting result of each file. Th
 * `usedDeprecatedRules` (`{ ruleId: string; replacedBy: string[] }[]`)<br>
   The information about the deprecated rules that were used to check this file.
 
-### ◆ LintMessage type
+### LintMessage type
 
 The `LintMessage` value is the information of each linting error. The `messages` property of the [LintResult] type contains it. It has the following properties:
 
@@ -367,7 +367,7 @@ The `LintMessage` value is the information of each linting error. The `messages`
 * `suggestions` (`{ desc: string; fix: EditInfo }[] | undefined`)<br>
   The list of suggestions. Each suggestion is the pair of a description and an [EditInfo] object to fix code. API users such as editor integrations can choose one of them to fix the problem of this message. This property is undefined if this message doesn't have any suggestions.
 
-### ◆ SuppressedLintMessage type
+### SuppressedLintMessage type
 
 The `SuppressedLintMessage` value is the information of each suppressed linting error. The `suppressedMessages` property of the [LintResult] type contains it. It has the following properties:
 
@@ -394,7 +394,7 @@ The `SuppressedLintMessage` value is the information of each suppressed linting 
 * `suppressions` (`{ kind: string; justification: string}[]`)<br>
   The list of suppressions. Each suppression is the pair of a kind and a justification.
 
-### ◆ EditInfo type
+### EditInfo type
 
 The `EditInfo` value is information to edit text. The `fix` and `suggestions` properties of [LintMessage] type contain it. It has following properties:
 
@@ -405,7 +405,7 @@ The `EditInfo` value is information to edit text. The `fix` and `suggestions` pr
 
 This edit information means replacing the range of the `range` property by the `text` property value. It's like `sourceCodeText.slice(0, edit.range[0]) + edit.text + sourceCodeText.slice(edit.range[1])`. Therefore, it's an add if the `range[0]` and `range[1]` property values are the same value, and it's removal if the `text` property value is empty string.
 
-### ◆ LoadedFormatter type
+### LoadedFormatter type
 
 The `LoadedFormatter` value is the object to convert the [LintResult] objects to text. The [eslint.loadFormatter()][eslint-loadformatter] method returns it. It has the following method:
 
@@ -920,11 +920,11 @@ ruleTester.run("my-rule", myRule, {
 [configuration object]: ../user-guide/configuring/
 [builtin-formatters]: ../user-guide/formatters/
 [third-party-formatters]: https://www.npmjs.com/search?q=eslintformatter
-[eslint-lintfiles]: #-eslintlintfilespatterns
-[eslint-linttext]: #-eslintlinttextcode-options
-[eslint-loadformatter]: #-eslintloadformatternameorpath
-[lintresult]: #-lintresult-type
-[lintmessage]: #-lintmessage-type
-[suppressedlintmessage]: #-suppressedlintmessage-type
-[editinfo]: #-editinfo-type
-[loadedformatter]: #-loadedformatter-type
+[eslint-lintfiles]: #eslintlintfilespatterns
+[eslint-linttext]: #eslintlinttextcode-options
+[eslint-loadformatter]: #eslintloadformatternameorpath
+[lintresult]: #lintresult-type
+[lintmessage]: #lintmessage-type
+[suppressedlintmessage]: #suppressedlintmessage-type
+[editinfo]: #editinfo-type
+[loadedformatter]: #loadedformatter-type
