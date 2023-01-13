@@ -71,7 +71,7 @@ module.exports = function(eleventyConfig) {
      */
     function slugify(text) {
         return slug(text.replace(/[<>()[\]{}]/gu, ""))
-        /* eslint-disable no-control-regex, require-unicode-regexp -- used regex from https://github.com/eslint/archive-website/blob/master/_11ty/plugins/markdown-plugins.js#L37*/
+        /* eslint-disable no-control-regex, require-unicode-regexp -- used regex to replace */
 
         // Remove control characters
             .replace(/[\u0000-\u001F]/g, "")
